@@ -1,0 +1,31 @@
+<%- include('partials/head.ejs') %>
+
+    <div class="container main-content d-flex align-items-center justify-content-center">
+
+        <form autocomplete="off" action="/checkin" method="post">
+
+            <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control form-control-lg fs-2 text-input" id="name" name="name">
+                <div id="nameHelp" class="form-text">Hint: Search by surname to check in a household!</div>
+            </div>
+
+            <div class="mb-3">
+                <label for="postcode" class="form-label">Postcode</label>
+                <input type="text" class="form-control form-control-lg fs-2 text-input text-uppercase" id="postcode"
+                    name="postcode" maxlength="4">
+            </div>
+
+            <div class="mb-3 d-grip gap-2 col-6 mx-auto">
+                <button type="submit" class="btn btn-primary btn-lg btn-xl fs-2">Search</button>
+            </div>
+
+        </form>
+
+    </div>
+
+    <%- include('partials/keyboard.ejs') %>
+        <%- include('partials/keypad.ejs') %>
+
+            <script src="js/app.js"></script>
+            <%- include('partials/footer.ejs') %>

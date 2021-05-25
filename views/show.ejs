@@ -1,0 +1,56 @@
+<%- include('partials/head.ejs') %>
+
+    <div class="container-fluid control-section text-center">
+        <h1>Register</h1>
+        <div class="row">
+            <div class="container justify-content-center d-flex align-items-center">
+                <div class="d-grid gap-2 col-5 mx-auto">
+                    <a href="/register" class="btn btn-primary btn-lg btn-xl fs-3">One person</a>
+                </div>
+                <div class="d-grid gap-2 col-5 mx-auto">
+                    <a href="/register/many" class="btn btn-primary btn-lg btn-xl fs-3">A Household</a>
+                </div>
+            </div>
+        </div>
+        <div class="info-section">
+            <div class="row">
+                <p class="fs-1 text-uppercase">Or</p>
+            </div>
+            <div class="row">
+                <p class="fs-3">Tap name to sign in</p>
+            </div>
+        </div>
+    </div>
+    
+
+
+    <div class="container">
+        <table class="table">
+            <tbody>
+                <% for (let match of matches) { %>
+                    <tr>
+                        <td>
+                            <%- `${match.firstName} ${match.lastName}` %>
+                        </td>
+                        <td class="text-center">
+                            <%- match.postcode %>
+                        </td>
+                        <td class="text-center">
+                            <%- match.phone %>
+                        </td>
+                        <td class="text-end">
+                            <button id="<%- match.id %>" class="btn btn-success signin-btn">Sign In</a>
+                        </td>
+                    </tr>
+                    <% }; if (!matches.length) { %>
+                        <tr>
+                            <td>No matches found, please register</td>
+                        </tr>
+                        <% } %>
+            </tbody>
+        </table>
+    </div>
+
+    <script src="/js/axios.js"></script>
+    <script src="/js/show_global.js"></script>
+    <%- include('partials/footer.ejs') %>

@@ -1,0 +1,195 @@
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    letter-spacing: 2px;
+}
+
+nav {
+    height: 64px;
+}
+
+nav i {
+    color: white;
+    font-size: 2rem;
+}
+
+h1 {
+    margin-top: 5vh;
+}
+
+tr {
+    transition: transform 1s;
+}
+tr.remove {
+    transform: translateX(-100vw);
+}
+
+#disclaimer {
+    position: none;
+    top: 70px;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+}
+
+#main-form {
+    margin-bottom: 30vh;
+}
+
+.page-top {
+    margin-top: 100px;
+}
+
+.dob-container {
+    display: flex;
+}
+.dob-container input {
+    width: 5vw;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+.form-active {
+    border-color:#86b7fe;
+    outline:0;
+    box-shadow:0 0 0 .25rem rgba(13,110,253,.25);
+}
+
+.main-content {
+    height: 70vh;
+}
+
+.control-section {
+    /*height: 30vh;*/
+    padding-top: 8vh;
+}
+
+.select {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.info-section {
+    margin: 4vh 0 4vh 0;
+}
+
+.btn-xl {
+    padding: 20px 50px;
+    /*font-size: 2rem;*/
+    border-radius: 10px;
+}
+
+.selection-board {
+    position: fixed;
+    top: 20px;
+    left: 0;
+    margin: 0 auto;
+    height: 100vh;
+    width: 100vw;
+    background: #000a;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.selection-board .select-header {
+    margin: 11vh auto 0;
+    background-color: #fff;
+    width: 70vw;
+    padding: 5px 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.selection-board .container {
+    background-color: #fff;
+    height: 50vh;
+    width: 70vw;
+    overflow: scroll;
+    margin: 0 auto auto;
+}
+
+.selection-board ul {
+    padding: 10px 0;
+}
+
+.selection-board.hide {
+    display: none;
+}
+
+.identify {
+    background-color: gray;
+}
+
+.keyboard, 
+.keypad {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    transition: left .5s;
+    transition-timing-function: ease-in-out;
+    background-color: white;
+    width: 100vw;
+    padding: 70px 0;
+}
+
+.keypad.hide,
+.keyboard.hide {
+    left: -100vw;
+}
+
+.keyboard button,
+.keypad button {
+    border-radius: calc(calc(18vw/3)/2.5);
+    height: calc(18vw/3);
+    margin: 3px 4px;
+    border: 1px solid lightgray;
+    /*transition: background-color .5s;*/
+}
+.keyboard button:focus, .keyboard button:active {
+    /*background-color: lightseagreen;*/
+    animation: animate .15s linear;
+}
+
+.keypad button {
+    border-radius: calc(calc(27vw/3)/2.5);
+    height: calc(27vw/3)
+}
+
+@keyframes animate {
+    0% {
+        box-shadow: 0 0 0 0 rgba(255, 0, 64, 0.7), 0 0 0 0 rgba(255, 0, 64, 0.7);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(255, 0, 64, 0), 0 0 0 10px rgba(255, 0, 64, 0);
+    }
+}
+
+.keypad .key,
+.keypad .fat {
+    width: 6.5vh;
+}
+
+.keyboard .key {
+    width: 6.5vw;
+}
+
+.keyboard .fat {
+    width: 8vw;
+}
+
+.space-bar {
+    width: 40vw;
+}
+
+.highlight-key {
+    background-color: lightskyblue;
+}
