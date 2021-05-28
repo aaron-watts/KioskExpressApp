@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const data = require('../data');
-console.log(data.selections);
+//console.log(data.selections);
 
 const memberSchema = new mongoose.Schema({
     firstName: {
@@ -61,8 +61,16 @@ const memberSchema = new mongoose.Schema({
     },
     diet: {
         type: String
+    },
+    lastVisit: {
+        type: Date
     }
 })
+
+memberSchema.virtual('fullName')
+    .get(function() {
+        return `${this.firstName} ${this.lastName}`
+    })
 
 const Member = mongoose.model('Member', memberSchema);
 

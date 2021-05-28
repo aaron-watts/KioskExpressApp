@@ -6,16 +6,20 @@ const mongoose = require('mongoose');
 
 const db = require('./data');
 const utils = require('./processes');
+const Member = require('./models/member');
+const Attendance = require('./models/attendance');
 
-mongoose.connect('mongodb://localhost:27017/registerApp', {useNewUrlParser: true, 
-                                                                useUnifiedTopology: true})
-            .then(() => {
-                console.log('MONGO CONNECTION OPEN!!!');
-            })
-            .catch(err => {
-                console.log('OH NO MONGO CONNECTION ERROR!!!');
-                console.log(err);
-            })
+mongoose.connect('mongodb://localhost:27017/registerApp', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+})
+    .then(() => {
+        console.log('MONGO CONNECTION OPEN!!!');
+    })
+    .catch(err => {
+        console.log('OH NO MONGO CONNECTION ERROR!!!');
+        console.log(err);
+    })
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -39,24 +43,30 @@ app.get('/register', (req, res) => {
     res.render('form', { qty, selections });
 })
 
-app.get('/register/many', (req,res) => {
+app.get('/register/many', (req, res) => {
     const { ethnicities, genders, languages } = db;
     const quantity = 'many';
     res.render('form', { qty, ethnicity, gender });
 })
 
-app.get('/selections', (req,res) => {
+app.get('/selections', (req, res) => {
     const { selections } = db;
     res.send(selections);
 })
 
-app.post('/signin', (req,res) => {
+/* app.post('/signin', (req, res) => {
+    const { id } = req.body;
+    console.log(id);
+    console.log('YOURE ONLY SUPPOSED TO BLOW THE BLOODY DOORS OFF');  
+}) */
+
+app.post('/signin', (req, res) => {
     const { id } = req.body;
     console.log(id);
     utils.addToRegister(id)
         .then(resolve => {
             console.log(resolve);
-            console.log(db.attendance);
+            //console.log(db.attendance);
             res.send('SUCCESS');
         }, err => {
             console.log(err);
@@ -68,27 +78,41 @@ app.get('/checkin', (req, res) => {
     res.render('tasks');
 })
 
-app.post('/checkin', (req, res) => {
-    const { name, postcode } = req.body;
-    console.log(req.body);
-    const matches = [];
+app.get('/show', async (req, res) => {
+    const { name, postcode } = req.query;
+    const allNames = name.split(' ');
+    const firstName = allNames[0];
+    const lastName = allNames[allNames.length - 1];
+    const results = await Member.find({ $or: [{ firstName: { $regex: `.*${firstName}.*`, $options: 'i' } }, { lastName: { $regex: `.*${lastName}.*`, $options: 'i' } }] });
+    let matches = [];
+    let inOneHour = new Date();
+    //inOneHour.setHours(inOneHour.getHours() - 2);
 
-    for (let person in db.people) {
-        const fullName = `${db.people[person].firstName.toLowerCase()} ${db.people[person].lastName.toLowerCase()}`;
-        if (db.people[person].postcode.includes(postcode.toUpperCase()) && fullName.includes(name.toLowerCase())) {
-            const id = person;
-            const firstName = db.people[person].firstName;
-            const lastName = db.people[person].lastName;
-            const postcode = `${db.people[person].postcode.slice(0,-3)} &bullet;&bullet;${db.people[person].postcode.slice(-1)}`;
-            let phone = db.people[person].phone;
-            if (phone) phone = `${phone.slice(0,2)}&bullet;&bullet;&bullet; &bullet;&bullet;&bullet; ${phone.slice(-3)}`;
-            if (!phone) phone = '';
-            matches.push({id, firstName, lastName, postcode, phone });
-        };
+    for (let person of results) {
+        //console.log(inOneHour - new Date(person.lastVisit));
+        //if(inOneHour - person.lastVisit)
+        let visitTime = new Date(person.lastVisit);
+        const timeDiff = (inOneHour - visitTime) / (60 * 60 * 1000);
+        console.log(timeDiff)
+        if (timeDiff >= 1) {
+            const id = `${person._id}`;
+            const firstName = person.firstName;
+            const lastName = person.lastName;
+            const postcode = `${person.postcode.slice(0, -3)} &bullet;&bullet;${person.postcode.slice(-1)}`;
+            let emergencyNumber = person.emergencyNumber;
+            if (emergencyNumber) emergencyNumber = `${emergencyNumber.slice(0, 2)}&bullet;&bullet;&bullet; &bullet;&bullet;&bullet; ${emergencyNumber.slice(-3)}`;
+            if (!emergencyNumber) emergencyNumber = '';
+            matches.push({ id, firstName, lastName, postcode, emergencyNumber });
+        }
+        /* console.log(`Date: ${visitTime}`);
+        console.log((visitTime - inOneHour) / (60*60*1000)) */
+
+
     }
 
     // CHANGE/REFINE MATCHES - don't send ALL UNCENSORED information to page!!! BAD!!!
     res.render('show', { matches });
+    //res.send(matches);
 })
 
 app.listen(port, () => {

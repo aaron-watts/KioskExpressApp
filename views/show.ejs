@@ -44,7 +44,7 @@
                             <%- match.postcode %>
                         </td>
                         <td class="text-center">
-                            <%- match.phone %>
+                            <%- match.emergencyNumber %>
                         </td>
                         <td class="text-center">
                             <button id="<%- match.id %>" class="btn btn-success signin-btn fs-2">
@@ -54,7 +54,7 @@
                     </tr>
                     <% }; if (!matches.length) { %>
                         <tr>
-                            <td>No matches found, please register</td>
+                            <td colspan="4">No matches found, please register</td>
                         </tr>
                         <% } %>
             </tbody>
