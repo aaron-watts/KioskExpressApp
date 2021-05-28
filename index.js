@@ -2,11 +2,20 @@ const express = require('express');
 const port = 3000;
 const app = express();
 const path = require('path');
-const { attendance } = require('./data');
+const mongoose = require('mongoose');
 
 const db = require('./data');
 const utils = require('./processes');
 
+mongoose.connect('mongodb://localhost:27017/registerApp', {useNewUrlParser: true, 
+                                                                useUnifiedTopology: true})
+            .then(() => {
+                console.log('MONGO CONNECTION OPEN!!!');
+            })
+            .catch(err => {
+                console.log('OH NO MONGO CONNECTION ERROR!!!');
+                console.log(err);
+            })
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());

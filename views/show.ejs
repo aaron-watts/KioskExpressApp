@@ -26,6 +26,14 @@
 
     <div class="container">
         <table class="table">
+            <thead>
+                <tr>
+                  <th scope="col">Name</th>
+                  <th class="text-center" scope="col">Postcode</th>
+                  <th class="text-center" scope="col">Phone</th>
+                  <th calss="text-end" scope="col">Sign In</th>
+                </tr>
+              </thead>
             <tbody>
                 <% for (let match of matches) { %>
                     <tr>
@@ -38,8 +46,10 @@
                         <td class="text-center">
                             <%- match.phone %>
                         </td>
-                        <td class="text-end">
-                            <button id="<%- match.id %>" class="btn btn-success signin-btn">Sign In</a>
+                        <td class="text-center">
+                            <button id="<%- match.id %>" class="btn btn-success signin-btn fs-2">
+                                <i class="bi bi-person-check"></i>
+                            </button>
                         </td>
                     </tr>
                     <% }; if (!matches.length) { %>

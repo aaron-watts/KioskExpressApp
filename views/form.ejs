@@ -1,23 +1,23 @@
 <%- include('partials/head.ejs') %>
 
-    <div class="container col-10 page-top">
+    <div class="container col-6 page-top">
         <form id="main-form" autocomplete="off" action="/checkin" method="post">
             <div class="mb-3">
                 <label for="firstName" class="form-label">First Name</label>
-                <input type="text" class="form-control form-control-lg fs-2 text-input form-active" id="firstName">
+                <input type="text" class="form-control form-control-lg text-input form-active" id="firstName">
             </div>
             <div class="mb-3">
                 <label for="lastName" class="form-label">Last Name</label>
-                <input type="text" class="form-control form-control-lg fs-2 text-input" id="lastName">
+                <input type="text" class="form-control form-control-lg text-input" id="lastName">
             </div>
             <div class="mb-3">
                 <label for="lastName" class="form-label">Date 0f Birth</label>
                 <div class="input-group dob-container">
-                    <input type="number" class="form-control form-control-lg fs-2 number-input" id="dobd"
+                    <input type="number" class="form-control form-control-lg number-input" id="dobd"
                         placeholder="dd" min=1 max=31 step=1 maxlength="2">
-                    <input type="number" class="form-control form-control-sm fs-2 number-input" id="dobm"
+                    <input type="number" class="form-control form-control-sm number-input" id="dobm"
                         placeholder="mm" min=1 max=12 step=1>
-                    <input type="number" class="form-control form-control-sm fs-2 number-input" id="doby"
+                    <input type="number" class="form-control form-control-sm number-input" id="doby"
                         placeholder="yyyy" min=1944 step=1>
                 </div>
 
@@ -25,51 +25,51 @@
 
             <div class="mb-3">
                 <label for="address" class="form-label">Door Number & Street Name</label>
-                <input type="text" class="form-control form-control-lg fs-2 text-input" id="address">
+                <input type="text" class="form-control form-control-lg text-input" id="address">
             </div>
             <div class="mb-3">
                 <label for="postcode" class="form-label">Postcode</label>
-                <input type="text" class="form-control form-control-lg fs-2 text-input text-uppercase" id="postcode">
+                <input type="text" class="form-control form-control-lg text-input text-uppercase" id="postcode">
             </div>
 
             <div class="mb-3">
                 <label for="contact-name" class="form-label">Emergency Contact Name</label>
-                <input type="text" class="form-control form-control-lg fs-2 text-input" id="contact-name">
+                <input type="text" class="form-control form-control-lg text-input" id="contact-name">
             </div>
             <div class="mb-3">
                 <label for="contact-number" class="form-label">Emergency Contact Number</label>
-                <input type="text" class="form-control form-control-lg fs-2 number-input text-uppercase"
+                <input type="text" class="form-control form-control-lg number-input text-uppercase"
                     id="contact-number">
             </div>
 
             <div class="mb-3">
                 <label for="ethnicity" class="form-label">Ethnicity</label>
-                <input type="text" class="form-control form-control-lg fs-2 select-input" id="ethnicity">
+                <input type="text" class="form-control form-control-lg select-input" id="ethnicity">
             </div>
             <div class="mb-3">
                 <label for="gender" class="form-label">Gender</label>
-                <input type="text" class="form-control form-control-lg fs-2 select-input" id="gender">
+                <input type="text" class="form-control form-control-lg select-input" id="gender">
             </div>
             <div class="mb-3">
                 <label for="language" class="form-label">Home Language</label>
-                <input type="text" class="form-control form-control-lg fs-2 select-input" id="language">
+                <input type="text" class="form-control form-control-lg select-input" id="language">
             </div>
             <div class="mb-3">
                 <label for="religion" class="form-label">Religion</label>
-                <input type="text" class="form-control form-control-lg fs-2 select-input" id="religion">
+                <input type="text" class="form-control form-control-lg select-input" id="religion">
             </div>
             <div class="mb-3">
                 <label for="school" class="form-label">School (If Wandsworth or Richmond Borough))</label>
-                <input type="text" class="form-control form-control-lg fs-2 select-input" id="school">
+                <input type="text" class="form-control form-control-lg select-input" id="school">
             </div>
 
             <div class="mb-3">
                 <label for="medical" class="form-label">Known Medical Conditions</label>
-                <input type="text" class="form-control form-control-lg fs-2 text-input" id="medical">
+                <input type="text" class="form-control form-control-lg text-input" id="medical">
             </div>
             <div class="mb-3">
                 <label for="diet" class="form-label">Dietary Requirements</label>
-                <input type="text" class="form-control form-control-lg fs-2 text-input" id="diet">
+                <input type="text" class="form-control form-control-lg text-input" id="diet">
             </div>
 
             <% if (qty==='one' ) { %>
