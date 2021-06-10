@@ -41,7 +41,7 @@ const memberSchema = new mongoose.Schema({
         required: true,
         enum: data.selections.genders
     },
-    langauge: {
+    language: {
         type: String,
         required: true,
         enum: data.selections.languages
@@ -63,6 +63,9 @@ const memberSchema = new mongoose.Schema({
         type: String
     },
     lastVisit: {
+        type: Date
+    },
+    dateJoined: {
         type: Date
     }
 })

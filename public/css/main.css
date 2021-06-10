@@ -1,10 +1,12 @@
 html {
     scroll-behavior: smooth;
+    scrollbar-width: none;
+    -moz-user-select: none;
 }
 
 body {
     letter-spacing: 2px;
-    font-size: 2.5rem;
+    font-size: 1.3rem;
 }
 
 nav {
@@ -21,10 +23,26 @@ h1 {
 }
 
 tr {
-    transition: transform 1s;
+    transition: transform .6s;
 }
 tr.remove {
     transform: translateX(-100vw);
+}
+
+td.control > i {
+    position: relative;
+    left: -100px;
+    z-index: -1;
+}
+
+td.control i,
+td.control button {
+    transition: opacity 1s;
+}
+
+td.control i.hide,
+td.control button.hide {
+    opacity: 0;
 }
 
 input[type="text"],
@@ -32,12 +50,50 @@ input[type="number"] {
     font-size: 2.3rem;
 }
 
+div.alert {
+    font-size: 2rem;
+    position: absolute;
+    top: 64px;
+    width: 100vw;
+    transition: transform 1s;
+}
+
+button.scroll {
+    position: fixed;
+    right: 50px;
+    font-size: 2rem;
+}
+
+button.scroll.hide {
+    display: none;
+}
+
+button.scroll.selection {
+    z-index: 1;
+    right: 150px;
+}
+
+button.scroll.selection.up {
+    top: 400px;
+}
+button.scroll.selection.down {
+    bottom: 640px;
+}
+
+button.scroll.up {
+    top: 100px;
+}
+
+button.scroll.down {
+    bottom: 100px;
+}
+
 .table > :not(caption) > * > * {
-    padding: 3rem;
+    padding: 2rem;
 }
 
 .signin-btn {
-    width: 160px;
+    width: 120px;
 }
 
 #disclaimer {
@@ -109,12 +165,13 @@ input[type=number] {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    z-index: 1;
 }
 
 .selection-board .select-header {
     margin: 11vh auto 0;
     background-color: #fff;
-    width: 50vw;
+    width: 60vw;
     padding: 5px 10px;
     display: flex;
     flex-direction: column;
@@ -123,13 +180,23 @@ input[type=number] {
 .selection-board .container {
     background-color: #fff;
     height: 50vh;
-    width: 50vw;
+    width: 60vw;
     overflow: scroll;
+    scrollbar-width: none;
+    scroll-behavior: smooth;
     margin: 0 auto auto;
 }
 
+.selection-board span > i {
+    font-size: 2rem;
+}
+
 .selection-board ul {
-    padding: 10px 0;
+    padding: 20px 0;
+}
+
+.selection-board li {
+    padding: 15px;
 }
 
 .selection-board.hide {

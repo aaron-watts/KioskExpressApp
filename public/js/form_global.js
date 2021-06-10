@@ -2,6 +2,7 @@ const selectInputs = document.querySelectorAll('.select-input');
 const selectBoards = document.querySelectorAll('.selection-board');
 const choices = document.querySelectorAll('.selection-board .list-group-item');
 const filterInputs = document.querySelectorAll('.filter-input');
+const selectScroll = document.querySelectorAll('.selection-scroll');
 
 let data = {
     'genders': [],
@@ -30,6 +31,8 @@ window.onload = async () => {
 
 const listListener = (e) => {
     const activeSelect = document.querySelector('.select-active');
+
+    selectScroll.forEach(i => i.classList.add('hide'));
 
     e.target.parentNode.parentNode.parentNode.classList.add('hide');
 
@@ -67,6 +70,7 @@ const filterResults = (activeInput) => {
         return choice.toLowerCase().includes(activeInput.value.toLowerCase());
     });
 
+
     for (let match of matches) {
         const li = document.createElement('li');
 
@@ -82,6 +86,7 @@ const filterResults = (activeInput) => {
 selectInputs.forEach(function (input) {
     input.addEventListener('click', function (e) {
 
+        selectScroll.forEach(i => i.classList.remove('hide'));
         allInputs.forEach(i => i.classList.remove('form-active'));
         input.classList.add('select-active');
 
@@ -93,6 +98,10 @@ selectInputs.forEach(function (input) {
         }
     });
 });
+
+const hideScrollers = () => {
+    selectScroll.forEach(i => i.classList.add('hide'));
+}
 
 choices.forEach(function (choice) {
     choice.addEventListener('click', function (e) {

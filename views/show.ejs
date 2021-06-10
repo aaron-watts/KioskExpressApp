@@ -5,10 +5,10 @@
         <div class="row">
             <div class="container justify-content-center d-flex align-items-center">
                 <div class="d-grid gap-2 col-5 mx-auto">
-                    <a href="/register" class="btn btn-primary btn-lg btn-xl fs-3">One person</a>
+                    <a href="/register?qty=one" class="btn btn-primary btn-lg btn-xl fs-3">One person</a>
                 </div>
                 <div class="d-grid gap-2 col-5 mx-auto">
-                    <a href="/register/many" class="btn btn-primary btn-lg btn-xl fs-3">A Household</a>
+                    <a href="/register?qty=many" class="btn btn-primary btn-lg btn-xl fs-3">A Household</a>
                 </div>
             </div>
         </div>
@@ -21,19 +21,19 @@
             </div>
         </div>
     </div>
-    
+
 
 
     <div class="container">
         <table class="table">
             <thead>
                 <tr>
-                  <th scope="col">Name</th>
-                  <th class="text-center" scope="col">Postcode</th>
-                  <th class="text-center" scope="col">Phone</th>
-                  <th calss="text-end" scope="col">Sign In</th>
+                    <th scope="col">Name</th>
+                    <th class="text-center" scope="col">Postcode</th>
+                    <th class="text-center" scope="col">Phone</th>
+                    <th calss="text-end" scope="col">Sign In</th>
                 </tr>
-              </thead>
+            </thead>
             <tbody>
                 <% for (let match of matches) { %>
                     <tr>
@@ -46,10 +46,18 @@
                         <td class="text-center">
                             <%- match.emergencyNumber %>
                         </td>
-                        <td class="text-center">
-                            <button id="<%- match.id %>" class="btn btn-success signin-btn fs-2">
-                                <i class="bi bi-person-check"></i>
-                            </button>
+                        <td class="text-center control">
+                            <% if (match.signedIn) { %>
+                                <button id="<%- match.id %>" class="btn btn-success signin-btn fs-3">
+                                    <i class="bi bi-person-check"></i>
+                                </button>
+                                <i class="bi bi-check-lg text-success hide"></i>
+                                <% } else { %>
+                                    <button id="<%- match.id %>" class="btn btn-success signin-btn fs-3 hide">
+                                        <i class="bi bi-person-check"></i>
+                                    </button>
+                                    <i class="bi bi-check-lg text-success"></i>
+                                    <% } %>
                         </td>
                     </tr>
                     <% }; if (!matches.length) { %>
@@ -60,6 +68,11 @@
             </tbody>
         </table>
     </div>
+
+    <!-- <div class="alert alert-info hide" role="alert">
+        A simple info alert—check it out!
+    </div> -->
+    
 
     <script src="/js/axios.js"></script>
     <script src="/js/show_global.js"></script>

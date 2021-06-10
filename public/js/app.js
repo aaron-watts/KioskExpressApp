@@ -12,9 +12,10 @@ const shiftKeys = document.querySelectorAll('.shift-key');
 
 let activeInput = document.querySelector('.form-active');
 
-
 let shift = true;
 let caps = false;
+
+const htmlScroll = document.querySelector('html');
 
 const setKeyboard = (casing) => {
     console.log(`Changing to ${casing}`);
@@ -87,7 +88,7 @@ document.addEventListener('click', function (e) {
     if(e.target.classList.contains('number-input')) keypad.classList.remove('hide');
 
     activeInput = document.querySelector('.form-active');
-    activeInput.scrollIntoView({behaviour:'smooth',block:'center'});
+    if (activeInput) activeInput.scrollIntoView({behaviour:'smooth',block:'center'});
 
     const targetIsKeyboard = () => {
         if (!e.target.classList.contains('text-input')
@@ -111,7 +112,6 @@ document.addEventListener('click', function (e) {
 
     if (!targetIsKeyboard()) keyboard.classList.add('hide');
     if (!targetIsKeypad()) keypad.classList.add('hide');
-    
 })
 
 // show keyboard for txt inputs

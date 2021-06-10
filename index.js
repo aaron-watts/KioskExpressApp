@@ -37,9 +37,10 @@ app.get('/', (req, res) => {
 })
 
 app.get('/register', (req, res) => {
+    const { qty } = req.query;
     const { selections } = db;
     //console.log(selections);
-    const qty = 'one';
+    //const qty = 'one';
     res.render('form', { qty, selections });
 })
 
@@ -49,16 +50,15 @@ app.get('/register/many', (req, res) => {
     res.render('form', { qty, ethnicity, gender });
 })
 
+app.post('/register', (req, res) => {
+
+    res.send(req.body);
+})
+
 app.get('/selections', (req, res) => {
     const { selections } = db;
     res.send(selections);
 })
-
-/* app.post('/signin', (req, res) => {
-    const { id } = req.body;
-    console.log(id);
-    console.log('YOURE ONLY SUPPOSED TO BLOW THE BLOODY DOORS OFF');  
-}) */
 
 app.post('/signin', (req, res) => {
     const { id } = req.body;
@@ -83,36 +83,44 @@ app.get('/show', async (req, res) => {
     const allNames = name.split(' ');
     const firstName = allNames[0];
     const lastName = allNames[allNames.length - 1];
-    const results = await Member.find({ $or: [{ firstName: { $regex: `.*${firstName}.*`, $options: 'i' } }, { lastName: { $regex: `.*${lastName}.*`, $options: 'i' } }] });
+    let results;
+    if (!name) {
+        results = await Member.find({ postcode: { $regex: `.*${postcode}.*`, $options: 'i' } });
+    }
+    else if (!postcode) {
+        results = await Member.find({
+            $or: [{ firstName: { $regex: `.*${firstName}.*`, $options: 'i' } },
+            { lastName: { $regex: `.*${lastName}.*`, $options: 'i' } }]
+        });
+    }
+    else {
+        results = await Member.find({ $and: [{ $or: [{ firstName: { $regex: `.*${firstName}.*`, $options: 'i' } },
+        { lastName: { $regex: `.*${lastName}.*`, $options: 'i' } }]}, { postcode: { $regex: `.*${postcode}.*`, $options: 'i' } }]});
+    }
     let matches = [];
     let inOneHour = new Date();
-    //inOneHour.setHours(inOneHour.getHours() - 2);
 
     for (let person of results) {
-        //console.log(inOneHour - new Date(person.lastVisit));
-        //if(inOneHour - person.lastVisit)
+        let signedIn = false;
         let visitTime = new Date(person.lastVisit);
+
         const timeDiff = (inOneHour - visitTime) / (60 * 60 * 1000);
-        console.log(timeDiff)
-        if (timeDiff >= 1) {
-            const id = `${person._id}`;
-            const firstName = person.firstName;
-            const lastName = person.lastName;
-            const postcode = `${person.postcode.slice(0, -3)} &bullet;&bullet;${person.postcode.slice(-1)}`;
-            let emergencyNumber = person.emergencyNumber;
-            if (emergencyNumber) emergencyNumber = `${emergencyNumber.slice(0, 2)}&bullet;&bullet;&bullet; &bullet;&bullet;&bullet; ${emergencyNumber.slice(-3)}`;
-            if (!emergencyNumber) emergencyNumber = '';
-            matches.push({ id, firstName, lastName, postcode, emergencyNumber });
-        }
-        /* console.log(`Date: ${visitTime}`);
-        console.log((visitTime - inOneHour) / (60*60*1000)) */
+        if (timeDiff >= 1) signedIn = true;
+        //signedIn = true;
 
+        const id = `${person._id}`;
 
+        const firstName = person.firstName;
+        const lastName = person.lastName;
+        const postcode = `${person.postcode.slice(0, -3)} &bullet;&bullet;${person.postcode.slice(-1)}`;
+        let emergencyNumber = person.emergencyNumber;
+        if (emergencyNumber) emergencyNumber = `${emergencyNumber.slice(0, 2)}&bullet;&bullet;&bullet; &bullet;&bullet;&bullet; ${emergencyNumber.slice(-3)}`;
+        if (!emergencyNumber) emergencyNumber = '';
+
+        matches.push({ id, firstName, lastName, postcode, emergencyNumber, signedIn });
     }
 
-    // CHANGE/REFINE MATCHES - don't send ALL UNCENSORED information to page!!! BAD!!!
     res.render('show', { matches });
-    //res.send(matches);
 })
 
 app.listen(port, () => {
