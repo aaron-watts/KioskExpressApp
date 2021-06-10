@@ -34,9 +34,30 @@ const setKeyboard = (casing) => {
 // Keyboard/keypad button controls
 keyboardButtons.forEach(button => {
     button.addEventListener('click', function (e) {
+        const getIndex = () => {
+            for (let i in allInputs) if (allInputs[i].id === activeInput.id) return parseInt(i);
+            return -1;
+        }
+
         if (this.classList.contains('key')) activeInput.value += this.innerHTML;
         if (this.classList.contains('space-bar')) activeInput.value += ' ';
 
+        if (this.id === 'return') {
+            const inputIndex = getIndex();
+            console.log(`${typeof inputIndex} ${inputIndex}`);
+            if (inputIndex >= 0 && inputIndex < allInputs.length) {
+                activeInput.classList.remove('form-active');
+                allInputs[inputIndex + 1].classList.add('form-active');
+                if (!allInputs[inputIndex + 1].classList.contains('text-input')) {
+                    keyboard.classList.add('hide');
+                }
+                if (!allInputs[inputIndex + 1].classList.contains('number-input')) {
+                    keypad.classList.add('hide');
+                }
+            }
+            
+            
+        }
         if (this.id === 'backspace') activeInput.value = activeInput.value.slice(0, activeInput.value.length - 1);
 
         if (activeInput.classList.contains('filter-input')) filterResults(activeInput);
