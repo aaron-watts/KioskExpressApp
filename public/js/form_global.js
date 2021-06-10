@@ -115,26 +115,38 @@ choices.forEach(function (choice) {
     });
 });
 
+const daysInMonth = (month, year=new Date().getFullYear()) => {
+    return new Date(year, month, 0).getDate();
+}
+
 const dobHandler = (key) => {
     const dobInputs = document.querySelectorAll('.dob-container input');
     const dobActive = document.querySelector('.form-active');
+    const day = document.querySelector('#dobd');
+    const month = document.querySelector('#dobm');
+    const year = document.querySelector('#doby');
 
     const inputKey = (key) => key.classList.contains('key') || key.classList.contains('space-bar');
 
     if (dobActive.id === 'dobd' && dobActive.value.length > 1) {
+        if (inputKey) dobActive.value = dobActive.value.slice(0,2);
+        if (inputKey && parseInt(dobActive.value) > 31) dobActive.value = '31';
+        
         dobActive.classList.remove('form-active');
         dobInputs[1].classList.add('form-active');
-        if (inputKey) dobActive.value = dobActive.value.slice(0,2);
     }
     if (dobActive.id === 'dobm' && dobActive.value.length > 1) {
+        if (inputKey) dobActive.value = dobActive.value.slice(0,2);
+        if (inputKey && parseInt(dobActive.value) > 12) dobActive.value = '12';
+        
         dobActive.classList.remove('form-active');
         dobInputs[2].classList.add('form-active');
-        if (inputKey) dobActive.value = dobActive.value.slice(0,2);
     }
     if (dobActive.id === 'doby' && dobActive.value.length > 3) {
         dobActive.classList.remove('form-active');
         keypad.classList.add('hide');
         if (inputKey) dobActive.value = dobActive.value.slice(0,4);
+        if (parseInt(dobd.value) > daysInMonth(parseInt(month.value), parseInt(dobActive.value))) dobd.value = daysInMonth(parseInt(month.value), parseInt(dobActive.value));
     }
 }
 
