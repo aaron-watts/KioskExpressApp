@@ -24,7 +24,7 @@
 
 
 
-    <div class="container">
+    <div id="member-table" class="container">
         <table class="table">
             <thead>
                 <tr>
@@ -69,11 +69,16 @@
         </table>
     </div>
 
+    <button class="btn btn-secondary main-scroll scroll table-scroll up"><i class="bi bi-caret-up-fill"></i></button>
+
+    <button class="btn btn-secondary main-scroll scroll table-scroll down"><i class="bi bi-caret-down-fill"></i></button>
+
     <!-- <div class="alert alert-info hide" role="alert">
         A simple info alert—check it out!
     </div> -->
-    
+
 
     <script src="/js/axios.js"></script>
     <script src="/js/show_global.js"></script>
+    <script src="/js/table_scroll.js"></script>
     <%- include('partials/footer.ejs') %>
