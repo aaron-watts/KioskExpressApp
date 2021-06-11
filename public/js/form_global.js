@@ -41,6 +41,8 @@ const listListener = (e) => {
     activeSelect.classList.remove('select-active');
 
     if (activeInput.classList.contains('filter-input')) activeInput.value = '';
+
+    changeLabel(activeSelect);
 }
 
 const defilterResults = (target) => {
@@ -119,6 +121,28 @@ const daysInMonth = (month, year=new Date().getFullYear()) => {
     return new Date(year, month, 0).getDate();
 }
 
+const extendDOB = () => {
+    const dobInputs = document.querySelectorAll('.dob-container input');
+    const dobActive = document.querySelector('.form-active');
+    const day = document.querySelector('#dobd');
+    const month = document.querySelector('#dobm');
+    const year = document.querySelector('#doby');
+
+
+    if (dobActive.id === 'dobd' && dobActive.value.length === 1) {
+        dobActive.value = `0${dobActive.value}`;
+    }
+    if (dobActive.id === 'dobm' && dobActive.value.length === 1) {
+        dobActive.value = `0${dobActive.value}`;
+    }
+    if (dobActive.id === 'doby' && dobActive.value.length === 2) {
+        if (parseInt(dobActive.value) < 40) dobActive.value = `20${dobActive.value}`;
+        else if (parseInt(dobActive.value) >= 40) dobActive.value = `19${dobActive.value}`;
+    }
+    
+    
+}
+
 const dobHandler = (key) => {
     const dobInputs = document.querySelectorAll('.dob-container input');
     const dobActive = document.querySelector('.form-active');
@@ -135,6 +159,7 @@ const dobHandler = (key) => {
         dobActive.classList.remove('form-active');
         dobInputs[1].classList.add('form-active');
     }
+
     if (dobActive.id === 'dobm' && dobActive.value.length > 1) {
         if (inputKey) dobActive.value = dobActive.value.slice(0,2);
         if (inputKey && parseInt(dobActive.value) > 12) dobActive.value = '12';
@@ -142,6 +167,7 @@ const dobHandler = (key) => {
         dobActive.classList.remove('form-active');
         dobInputs[2].classList.add('form-active');
     }
+
     if (dobActive.id === 'doby' && dobActive.value.length > 3) {
         dobActive.classList.remove('form-active');
         keypad.classList.add('hide');
@@ -150,3 +176,41 @@ const dobHandler = (key) => {
     }
 }
 
+const getLabel = (active) => {
+    for (let label of labels) if (active.id === label.htmlFor) return label;
+    return null;
+}
+
+const changeLabel = (active) => {
+
+    if (active.id !== 'dobd' && active.id !== 'dobm' && !active.classList.contains('filter-input')) {
+        const label = getLabel(active);
+
+        if (active.id !== 'doby') {
+            if (active.value) {
+                label.children[0].classList.remove('text-danger');
+                label.children[0].classList.add('text-success');
+                label.children[0].innerHTML = '<i class="bi bi-check-circle-fill"></i>';
+            }
+            if (!active.value) {
+                label.children[0].classList.remove('text-success');
+                label.children[0].classList.add('text-danger');
+                label.children[0].innerHTML = '(Required)';
+            }
+        }
+
+        if (active.id === 'doby') {
+            if (active.value && dobd.value && dobd.value) {
+                label.children[0].classList.remove('text-danger');
+                label.children[0].classList.add('text-success');
+                label.children[0].innerHTML = '<i class="bi bi-check-circle-fill"></i>';
+            } else {
+                label.children[0].classList.remove('text-success');
+                label.children[0].classList.add('text-danger');
+                label.children[0].innerHTML = '(Required)';
+            }
+        }
+        
+    }
+
+}

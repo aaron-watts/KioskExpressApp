@@ -9,6 +9,9 @@ const keyboardTextInputs = document.querySelectorAll('.key');
 const keyboard = document.querySelector('section.keyboard');
 const keypad = document.querySelector('section.keypad');
 const shiftKeys = document.querySelectorAll('.shift-key');
+const labels = document.querySelectorAll('label');
+const dobd = document.querySelector('#dobd');
+const dobm = document.querySelector('#dobm');
 
 let activeInput = document.querySelector('.form-active');
 
@@ -42,23 +45,9 @@ keyboardButtons.forEach(button => {
         if (this.classList.contains('key')) activeInput.value += this.innerHTML;
         if (this.classList.contains('space-bar')) activeInput.value += ' ';
 
-        if (this.id === 'return') {
-            const inputIndex = getIndex();
-            console.log(`${typeof inputIndex} ${inputIndex}`);
-            if (inputIndex >= 0 && inputIndex < allInputs.length) {
-                activeInput.classList.remove('form-active');
-                allInputs[inputIndex + 1].classList.add('form-active');
-                if (!allInputs[inputIndex + 1].classList.contains('text-input')) {
-                    keyboard.classList.add('hide');
-                }
-                if (!allInputs[inputIndex + 1].classList.contains('number-input')) {
-                    keypad.classList.add('hide');
-                }
-            }
-            
-            
-        }
         if (this.id === 'backspace') activeInput.value = activeInput.value.slice(0, activeInput.value.length - 1);
+
+        changeLabel(activeInput);
 
         if (activeInput.classList.contains('filter-input')) filterResults(activeInput);
         /* if (activeInput.id === 'dobd' || activeInput.id === 'dobm') {
@@ -96,6 +85,27 @@ keyboardButtons.forEach(button => {
             this.classList.add('highlight-key')
         }
 
+        if (this.id === 'return') {
+            const inputIndex = getIndex();
+
+            if (activeInput.id.includes('dob')) extendDOB();
+
+            if (inputIndex === 16) return;
+
+            if (inputIndex >= 0 && activeInput.id !== 'diet') {
+                activeInput.classList.remove('form-active');
+                allInputs[inputIndex + 1].classList.add('form-active');
+
+                if (!allInputs[inputIndex + 1].classList.contains('text-input')) keyboard.classList.add('hide');
+                if (!allInputs[inputIndex + 1].classList.contains('number-input')) keypad.classList.add('hide');
+            }
+            if (activeInput.id === 'diet') {
+                activeInput.classList.remove('form-active');
+                keyboard.classList.add('hide');
+                keypad.classList.add('hide');
+            }
+        }
+
         button.blur();
     })
 })
@@ -104,12 +114,12 @@ keyboardButtons.forEach(button => {
 // hide keyboard/keypad
 document.addEventListener('click', function (e) {
 
-    if(e.target.nodeName === 'INPUT') e.target.classList.add('form-active');
-    if(e.target.classList.contains('text-input')) keyboard.classList.remove('hide');
-    if(e.target.classList.contains('number-input')) keypad.classList.remove('hide');
+    if (e.target.nodeName === 'INPUT') e.target.classList.add('form-active');
+    if (e.target.classList.contains('text-input')) keyboard.classList.remove('hide');
+    if (e.target.classList.contains('number-input')) keypad.classList.remove('hide');
 
     activeInput = document.querySelector('.form-active');
-    if (activeInput) activeInput.scrollIntoView({behaviour:'smooth',block:'center'});
+    if (activeInput) activeInput.scrollIntoView({ behaviour: 'smooth', block: 'center' });
 
     const targetIsKeyboard = () => {
         if (!e.target.classList.contains('text-input')
@@ -120,7 +130,7 @@ document.addEventListener('click', function (e) {
         }
         return true;
     }
-    
+
 
     const targetIsKeypad = () => {
         if (!e.target.classList.contains('number-input')
