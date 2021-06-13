@@ -201,11 +201,20 @@ const changeLabel = (active) => {
         const label = getLabel(active);
 
         if (active.id !== 'doby') {
-            if (active.value && active.id !== 'postcode') validateInput(label, true);
+            if (active.value && active.id !== 'postcode' && active.id !== 'contactNumber') validateInput(label, true);
             if (active.value && active.id === 'postcode' && postcodeRegex.test(active.value)) {
                 validateInput(label, true);
             }
-            if (!active.value) validateInput(label, false);
+            if (active.value && active.id === 'contactNumber' && active.value.replaceAll(' ','').length === 11) {
+                validateInput(label, true);
+            }
+            if (!active.value && active.id !== 'postcode' && active.id !== 'contactNumber') validateInput(label, false);
+            if (active.value && active.id === 'postcode' && !postcodeRegex.test(active.value)) {
+                validateInput(label, false);
+            }
+            if (active.value && active.id === 'contactNumber' && active.value.replaceAll(' ','').length !== 11) {
+                validateInput(label, false);
+            }
         }
 
         if (active.id === 'doby') {
