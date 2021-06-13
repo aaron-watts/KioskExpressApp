@@ -4,6 +4,8 @@ const choices = document.querySelectorAll('.selection-board .list-group-item');
 const filterInputs = document.querySelectorAll('.filter-input');
 const selectScroll = document.querySelectorAll('.selection-scroll');
 
+const postcodeRegex = /^(([gG][iI][rR] {0,}0[aA]{2})|((([a-pr-uwyzA-PR-UWYZ][a-hk-yA-HK-Y]?[0-9][0-9]?)|(([a-pr-uwyzA-PR-UWYZ][0-9][a-hjkstuwA-HJKSTUW])|([a-pr-uwyzA-PR-UWYZ][a-hk-yA-HK-Y][0-9][abehmnprv-yABEHMNPRV-Y]))) {0,}[0-9][abd-hjlnp-uw-zABD-HJLNP-UW-Z]{2}))$/;
+
 let data = {
     'genders': [],
     'ethnicities': [],
@@ -117,7 +119,7 @@ choices.forEach(function (choice) {
     });
 });
 
-const daysInMonth = (month, year=new Date().getFullYear()) => {
+const daysInMonth = (month, year = new Date().getFullYear()) => {
     return new Date(year, month, 0).getDate();
 }
 
@@ -139,8 +141,8 @@ const extendDOB = () => {
         if (parseInt(dobActive.value) < 40) dobActive.value = `20${dobActive.value}`;
         else if (parseInt(dobActive.value) >= 40) dobActive.value = `19${dobActive.value}`;
     }
-    
-    
+
+
 }
 
 const dobHandler = (key) => {
@@ -153,17 +155,17 @@ const dobHandler = (key) => {
     const inputKey = (key) => key.classList.contains('key') || key.classList.contains('space-bar');
 
     if (dobActive.id === 'dobd' && dobActive.value.length > 1) {
-        if (inputKey) dobActive.value = dobActive.value.slice(0,2);
+        if (inputKey) dobActive.value = dobActive.value.slice(0, 2);
         if (inputKey && parseInt(dobActive.value) > 31) dobActive.value = '31';
-        
+
         dobActive.classList.remove('form-active');
         dobInputs[1].classList.add('form-active');
     }
 
     if (dobActive.id === 'dobm' && dobActive.value.length > 1) {
-        if (inputKey) dobActive.value = dobActive.value.slice(0,2);
+        if (inputKey) dobActive.value = dobActive.value.slice(0, 2);
         if (inputKey && parseInt(dobActive.value) > 12) dobActive.value = '12';
-        
+
         dobActive.classList.remove('form-active');
         dobInputs[2].classList.add('form-active');
     }
@@ -171,7 +173,7 @@ const dobHandler = (key) => {
     if (dobActive.id === 'doby' && dobActive.value.length > 3) {
         dobActive.classList.remove('form-active');
         keypad.classList.add('hide');
-        if (inputKey) dobActive.value = dobActive.value.slice(0,4);
+        if (inputKey) dobActive.value = dobActive.value.slice(0, 4);
         if (parseInt(dobd.value) > daysInMonth(parseInt(month.value), parseInt(dobActive.value))) dobd.value = daysInMonth(parseInt(month.value), parseInt(dobActive.value));
     }
 }
@@ -181,36 +183,36 @@ const getLabel = (active) => {
     return null;
 }
 
-const changeLabel = (active) => {
+const validateInput = (label, valid) => {
+    if (valid) {
+        label.children[0].classList.remove('text-danger');
+        label.children[0].classList.add('text-success');
+        label.children[0].innerHTML = '<i class="bi bi-check-circle-fill"></i>';
+    }
+    if (!valid) {
+        label.children[0].classList.remove('text-success');
+        label.children[0].classList.add('text-danger');
+        label.children[0].innerHTML = '(Required)';
+    }
+}
 
+const changeLabel = (active) => {
     if (active.id !== 'dobd' && active.id !== 'dobm' && !active.classList.contains('filter-input')) {
         const label = getLabel(active);
 
         if (active.id !== 'doby') {
-            if (active.value) {
-                label.children[0].classList.remove('text-danger');
-                label.children[0].classList.add('text-success');
-                label.children[0].innerHTML = '<i class="bi bi-check-circle-fill"></i>';
+            if (active.value && active.id !== 'postcode') validateInput(label, true);
+            if (active.value && active.id === 'postcode' && postcodeRegex.test(active.value)) {
+                validateInput(label, true);
             }
-            if (!active.value) {
-                label.children[0].classList.remove('text-success');
-                label.children[0].classList.add('text-danger');
-                label.children[0].innerHTML = '(Required)';
-            }
+            if (!active.value) validateInput(label, false);
         }
 
         if (active.id === 'doby') {
-            if (active.value && dobd.value && dobd.value) {
-                label.children[0].classList.remove('text-danger');
-                label.children[0].classList.add('text-success');
-                label.children[0].innerHTML = '<i class="bi bi-check-circle-fill"></i>';
-            } else {
-                label.children[0].classList.remove('text-success');
-                label.children[0].classList.add('text-danger');
-                label.children[0].innerHTML = '(Required)';
-            }
+            if (active.value && dobd.value && dobd.value) validateInput(label, true) 
+            else validateInput(label, false);
         }
-        
+
     }
 
 }
