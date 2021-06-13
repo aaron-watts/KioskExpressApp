@@ -117,7 +117,7 @@ document.addEventListener('click', function (e) {
     if (e.target.nodeName === 'INPUT') e.target.classList.add('form-active');
     if (e.target.classList.contains('text-input')) keyboard.classList.remove('hide');
     if (e.target.classList.contains('number-input')) keypad.classList.remove('hide');
-
+    
     activeInput = document.querySelector('.form-active');
     if (activeInput) activeInput.scrollIntoView({ behaviour: 'smooth', block: 'center' });
 
@@ -149,6 +149,7 @@ document.addEventListener('click', function (e) {
 textInputs.forEach(input => {
     console.log('textInput Changes');
     input.addEventListener('click', (e) => {
+        if (extendDOB) extendDOB();
         //console.log('Is shouldn\'t be here');
         if (activeInput.classList.contains('filter-input')) activeInput.value = '';
         allInputs.forEach(i => i.classList.remove('form-active'));
@@ -162,6 +163,7 @@ textInputs.forEach(input => {
 numberInputs.forEach(input => {
     console.log('numInput Changes');
     input.addEventListener('click', () => {
+        if (extendDOB) extendDOB();
         allInputs.forEach(i => i.classList.remove('form-active'));
         input.classList.add('form-active');
         keypad.classList.remove('hide');

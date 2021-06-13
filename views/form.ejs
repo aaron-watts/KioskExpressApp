@@ -3,73 +3,90 @@
     <div class="container col-8 page-top">
         <form id="main-form" autocomplete="off" action="/register" method="post">
             <div class="mb-3">
-                <label for="firstName" class="form-label">First Name <span class="fs-6 text-danger">(Required)</span></label>
+                <label for="firstName" class="form-label">First Name <span
+                        class="fs-6 text-danger">(Required)</span></label>
                 <input type="text" class="form-control form-control-lg text-input form-active" id="firstName"
                     name="firstName" required>
             </div>
             <div class="mb-3">
-                <label for="lastName" class="form-label">Last Name <span class="fs-6 text-danger">(Required)</span></label>
-                <input type="text" class="form-control form-control-lg text-input" id="lastName" required>
+                <label for="lastName" class="form-label">Last Name <span
+                        class="fs-6 text-danger">(Required)</span></label>
+                <input type="text" class="form-control form-control-lg text-input" id="lastName" name="lastName"
+                    required>
             </div>
             <div class="mb-3">
-                <label for="doby" class="form-label">Date 0f Birth <span class="fs-6 text-danger">(Required)</span></label>
+                <label for="doby" class="form-label">Date 0f Birth <span
+                        class="fs-6 text-danger">(Required)</span></label>
                 <div class="input-group dob-container">
                     <input type="number" class="form-control form-control-lg number-input" id="dobd" name="dobd"
                         placeholder="dd" min=1 max=31 step=1 maxlength="2" required>
                     <input type="number" class="form-control form-control-sm number-input" id="dobm" name="dobm"
                         placeholder="mm" min=1 max=12 step=1 reqiured>
-                    <input type="number" class="form-control form-control-sm number-input" id="doby" placeholder="yyyy"
-                        min=1944 step=1 required>
+                    <input type="number" class="form-control form-control-sm number-input" id="doby" name="doby"
+                        placeholder="yyyy" min=1944 step=1 required>
                 </div>
 
             </div>
 
             <div class="mb-3">
-                <label for="address" class="form-label">Door Number & Street Name <span class="fs-6 text-danger">(Required)</span></label>
-                <input type="text" class="form-control form-control-lg text-input" id="address" required>
+                <label for="address" class="form-label">Door Number & Street Name <span
+                        class="fs-6 text-danger">(Required)</span></label>
+                <input type="text" class="form-control form-control-lg text-input" id="address" name="address" required>
             </div>
             <div class="mb-3">
-                <label for="postcode" class="form-label">Postcode <span class="fs-6 text-danger">(Required)</span></label>
-                <input type="text" class="form-control form-control-lg text-input text-uppercase" id="postcode" required>
-            </div>
-
-            <div class="mb-3">
-                <label for="contactName" class="form-label">Emergency Contact Name <span class="fs-6 text-danger">(Required)</span></label>
-                <input type="text" class="form-control form-control-lg text-input" id="contactName">
-            </div>
-            <div class="mb-3">
-                <label for="contactNumber" class="form-label">Emergency Contact Number <span class="fs-6 text-danger">(Required)</span></label>
-                <input type="text" class="form-control form-control-lg number-input text-uppercase" id="contactNumber" required>
+                <label for="postcode" class="form-label">Postcode <span
+                        class="fs-6 text-danger">(Required)</span></label>
+                <input type="text" class="form-control form-control-lg text-input text-uppercase" id="postcode"
+                    name="postcode" required>
             </div>
 
             <div class="mb-3">
-                <label for="ethnicity" class="form-label">Ethnicity <span class="fs-6 text-danger">(Required)</span></label>
-                <input type="text" class="form-control form-control-lg select-input" id="ethnicity" required>
+                <label for="contactName" class="form-label">Emergency Contact Name <span
+                        class="fs-6 text-danger">(Required)</span></label>
+                <input type="text" class="form-control form-control-lg text-input" id="contactName" name="contactName"
+                    required>
+            </div>
+            <div class="mb-3">
+                <label for="contactNumber" class="form-label">Emergency Contact Number <span
+                        class="fs-6 text-danger">(Required)</span></label>
+                <input type="text" class="form-control form-control-lg number-input text-uppercase" id="contactNumber"
+                    name="contactNumber" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="ethnicity" class="form-label">Ethnicity <span
+                        class="fs-6 text-danger">(Required)</span></label>
+                <input type="text" class="form-control form-control-lg select-input" id="ethnicity" name="ethnicity"
+                    required>
             </div>
             <div class="mb-3">
                 <label for="gender" class="form-label">Gender <span class="fs-6 text-danger">(Required)</span></label>
-                <input type="text" class="form-control form-control-lg select-input" id="gender" required>
+                <input type="text" class="form-control form-control-lg select-input" id="gender" name="gender" required>
             </div>
             <div class="mb-3">
-                <label for="language" class="form-label">Home Language <span class="fs-6 text-danger">(Required)</span></label>
-                <input type="text" class="form-control form-control-lg select-input" id="language" required>
+                <label for="language" class="form-label">Home Language <span
+                        class="fs-6 text-danger">(Required)</span></label>
+                <input type="text" class="form-control form-control-lg select-input" id="language" name="language"
+                    required>
             </div>
             <div class="mb-3">
-                <label for="religion" class="form-label">Religion <span class="fs-6 text-danger">(Required)</span></label>
-                <input type="text" class="form-control form-control-lg select-input" id="religion" required>
+                <label for="religion" class="form-label">Religion <span
+                        class="fs-6 text-danger">(Required)</span></label>
+                <input type="text" class="form-control form-control-lg select-input" id="religion" name="religion"
+                    required>
             </div>
             <div class="mb-3">
                 <label for="school" class="form-label">School <span class="fs-6 text-danger">(Required)</span></label>
-                <input type="text" class="form-control form-control-lg select-input" id="school" required>
+                <input type="text" class="form-control form-control-lg select-input" id="school" name="school" required>
             </div>
 
             <div class="mb-3">
                 <label for="medical" class="form-label">Known Medical Conditions</label>
-                <input type="text" class="form-control form-control-lg text-input" id="medical">
+                <input type="text" class="form-control form-control-lg text-input" id="medical" name="medical">
             </div>
             <div class="mb-3">
                 <label for="diet" class="form-label">Dietary Requirements</label>
-                <input type="text" class="form-control form-control-lg text-input" id="diet">
+                <input type="text" class="form-control form-control-lg text-input" id="diet" name="diet">
             </div>
 
             <% if (qty==='one' ) { %>

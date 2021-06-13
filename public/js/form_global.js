@@ -89,6 +89,7 @@ const filterResults = (activeInput) => {
 
 selectInputs.forEach(function (input) {
     input.addEventListener('click', function (e) {
+        extendDOB();
 
         selectScroll.forEach(i => i.classList.remove('hide'));
         allInputs.forEach(i => i.classList.remove('form-active'));

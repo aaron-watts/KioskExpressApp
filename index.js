@@ -51,7 +51,6 @@ app.get('/register/many', (req, res) => {
 })
 
 app.post('/register', (req, res) => {
-
     res.send(req.body);
 })
 
