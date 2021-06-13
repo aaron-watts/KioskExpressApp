@@ -6,16 +6,16 @@ html {
 
 body {
     letter-spacing: 2px;
-    font-size: 1.3rem;
+    font-size: 1rem;
 }
 
 nav {
-    height: 64px;
+    height: 50px;
 }
 
 nav i {
     color: white;
-    font-size: 2rem;
+    font-size: 1.6rem;
 }
 
 h1 {
@@ -54,11 +54,11 @@ td.control button.hide {
 
 input[type="text"],
 input[type="number"] {
-    font-size: 2.3rem;
+    font-size: 1.6rem;
 }
 
 div.alert {
-    font-size: 2rem;
+    font-size: 1.6rem;
     position: absolute;
     top: 64px;
     width: 100vw;
@@ -68,7 +68,7 @@ div.alert {
 button.scroll {
     position: fixed;
     right: 50px;
-    font-size: 2rem;
+    font-size: 1.8rem;
 }
 
 button.scroll.hide {
@@ -77,14 +77,14 @@ button.scroll.hide {
 
 button.scroll.selection {
     z-index: 1;
-    right: 150px;
+    right: 80px;
 }
 
 button.scroll.selection.up {
-    top: 400px;
+    top: 300px;
 }
 button.scroll.selection.down {
-    bottom: 640px;
+    bottom: 420px;
 }
 
 button.scroll.up {
@@ -100,7 +100,7 @@ button.scroll.table-scroll.up {
 }
 
 .table > :not(caption) > * > * {
-    padding: 2rem;
+    padding: 1.8rem;
 }
 
 .signin-btn {
@@ -120,7 +120,7 @@ button.scroll.table-scroll.up {
 }
 
 .page-top {
-    margin-top: 100px;
+    margin-top: 70px;
 }
 
 .dob-container {
@@ -190,7 +190,7 @@ input[type=number] {
 
 .selection-board .container {
     background-color: #fff;
-    height: 50vh;
+    height: 45vh;
     width: 60vw;
     overflow: scroll;
     scrollbar-width: none;
