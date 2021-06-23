@@ -184,19 +184,6 @@ const getLabel = (active) => {
     return null;
 }
 
-const validateInput = (label, valid) => {
-    if (valid) {
-        label.children[0].classList.remove('text-danger');
-        label.children[0].classList.add('text-success');
-        label.children[0].innerHTML = '<i class="bi bi-check-circle-fill"></i>';
-    }
-    if (!valid) {
-        label.children[0].classList.remove('text-success');
-        label.children[0].classList.add('text-danger');
-        label.children[0].innerHTML = '(Required)';
-    }
-}
-
 const changeLabel = (active) => {
     if (active.id !== 'dobd' && active.id !== 'dobm' && !active.classList.contains('filter-input')) {
         const label = getLabel(active);
@@ -226,3 +213,17 @@ const changeLabel = (active) => {
     }
 
 }
+
+const validateInput = (label, valid) => {
+    if (valid) {
+        label.children[0].classList.remove('text-danger');
+        label.children[0].classList.add('text-success');
+        label.children[0].innerHTML = '<i class="bi bi-check-circle-fill"></i>';
+    }
+    if (!valid) {
+        label.children[0].classList.remove('text-success');
+        label.children[0].classList.add('text-danger');
+        label.children[0].innerHTML = '(Required)';
+    }
+}
+

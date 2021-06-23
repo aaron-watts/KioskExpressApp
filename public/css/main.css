@@ -6,7 +6,7 @@ html {
 
 body {
     letter-spacing: 2px;
-    font-size: 1rem;
+    font-size: 0.9rem;
 }
 
 nav {
@@ -67,7 +67,7 @@ div.alert {
 
 button.scroll {
     position: fixed;
-    right: 50px;
+    right: 20px;
     font-size: 1.8rem;
 }
 
@@ -92,11 +92,11 @@ button.scroll.up {
 }
 
 button.scroll.down {
-    bottom: 100px;
+    bottom: 60px;
 }
 
 button.scroll.table-scroll.up {
-    top: 880px;
+    top: 600px;
 }
 
 .table > :not(caption) > * > * {
@@ -104,7 +104,7 @@ button.scroll.table-scroll.up {
 }
 
 .signin-btn {
-    width: 120px;
+    width: 100px;
 }
 
 #disclaimer {

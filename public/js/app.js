@@ -47,7 +47,11 @@ keyboardButtons.forEach(button => {
 
         if (this.id === 'backspace') activeInput.value = activeInput.value.slice(0, activeInput.value.length - 1);
 
-        changeLabel(activeInput);
+        try {
+            changeLabel(activeInput);
+        } catch (e) {
+            console.log(e);
+        }
 
         if (activeInput.classList.contains('filter-input')) filterResults(activeInput);
         /* if (activeInput.id === 'dobd' || activeInput.id === 'dobm') {

@@ -44,12 +44,6 @@ app.get('/register', (req, res) => {
     res.render('form', { qty, selections });
 })
 
-app.get('/register/many', (req, res) => {
-    const { ethnicities, genders, languages } = db;
-    const quantity = 'many';
-    res.render('form', { qty, ethnicity, gender });
-})
-
 app.post('/register', (req, res) => {
     res.send(req.body);
 })
