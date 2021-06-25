@@ -1,28 +1,29 @@
 <%- include('partials/head.ejs') %>
 
     <div class="container col-8 page-top">
-        <form id="main-form" autocomplete="off" action="/register" method="post">
+        <form id="main-form" autocomplete="off" action="/register?_method=PUT" method="POST"
+            onsubmit="return validateForm()">
             <div class="mb-3">
                 <label for="firstName" class="form-label">First Name <span
                         class="fs-6 text-danger">(Required)</span></label>
                 <input type="text" class="form-control form-control-lg text-input form-active" id="firstName"
-                    name="firstName" required>
+                    name="member[firstName]" required>
             </div>
             <div class="mb-3">
                 <label for="lastName" class="form-label">Last Name <span
                         class="fs-6 text-danger">(Required)</span></label>
-                <input type="text" class="form-control form-control-lg text-input" id="lastName" name="lastName"
+                <input type="text" class="form-control form-control-lg text-input" id="lastName" name="member[lastName]"
                     required>
             </div>
             <div class="mb-3">
                 <label for="doby" class="form-label">Date 0f Birth <span
                         class="fs-6 text-danger">(Required)</span></label>
                 <div class="input-group dob-container">
-                    <input type="number" class="form-control form-control-lg number-input" id="dobd" name="dobd"
+                    <input type="number" class="form-control form-control-lg number-input" id="dobd" name="member[dobd]"
                         placeholder="dd" min=1 max=31 step=1 maxlength="2" required>
-                    <input type="number" class="form-control form-control-sm number-input" id="dobm" name="dobm"
+                    <input type="number" class="form-control form-control-sm number-input" id="dobm" name="member[dobm]"
                         placeholder="mm" min=1 max=12 step=1 reqiured>
-                    <input type="number" class="form-control form-control-sm number-input" id="doby" name="doby"
+                    <input type="number" class="form-control form-control-sm number-input" id="doby" name="member[doby]"
                         placeholder="yyyy" min=1944 step=1 required>
                 </div>
 
@@ -31,62 +32,65 @@
             <div class="mb-3">
                 <label for="address" class="form-label">Door Number & Street Name <span
                         class="fs-6 text-danger">(Required)</span></label>
-                <input type="text" class="form-control form-control-lg text-input" id="address" name="address" required>
+                <input type="text" class="form-control form-control-lg text-input" id="address" name="member[address]"
+                    required>
             </div>
             <div class="mb-3">
                 <label for="postcode" class="form-label">Postcode <span
                         class="fs-6 text-danger">(Required)</span></label>
                 <input type="text" class="form-control form-control-lg text-input text-uppercase" id="postcode"
-                    name="postcode" required>
+                    name="member[postcode]" required>
             </div>
 
             <div class="mb-3">
                 <label for="contactName" class="form-label">Emergency Contact Name <span
                         class="fs-6 text-danger">(Required)</span></label>
-                <input type="text" class="form-control form-control-lg text-input" id="contactName" name="contactName"
-                    required>
+                <input type="text" class="form-control form-control-lg text-input" id="contactName"
+                    name="member[contactName]" required>
             </div>
             <div class="mb-3">
                 <label for="contactNumber" class="form-label">Emergency Contact Number <span
                         class="fs-6 text-danger">(Required)</span></label>
                 <input type="text" class="form-control form-control-lg number-input text-uppercase" id="contactNumber"
-                    name="contactNumber" required>
+                    name="member[contactNumber]" maxlength="11" minlength="11" required>
             </div>
 
             <div class="mb-3">
                 <label for="ethnicity" class="form-label">Ethnicity <span
                         class="fs-6 text-danger">(Required)</span></label>
-                <input type="text" class="form-control form-control-lg select-input" id="ethnicity" name="ethnicity"
-                    required>
+                <input type="text" class="form-control form-control-lg select-input" id="ethnicity"
+                    name="member[ethnicity]" required>
             </div>
             <div class="mb-3">
                 <label for="gender" class="form-label">Gender <span class="fs-6 text-danger">(Required)</span></label>
-                <input type="text" class="form-control form-control-lg select-input" id="gender" name="gender" required>
+                <input type="text" class="form-control form-control-lg select-input" id="gender" name="member[gender]"
+                    required>
             </div>
             <div class="mb-3">
                 <label for="language" class="form-label">Home Language <span
                         class="fs-6 text-danger">(Required)</span></label>
-                <input type="text" class="form-control form-control-lg select-input" id="language" name="language"
-                    required>
+                <input type="text" class="form-control form-control-lg select-input" id="language"
+                    name="member[language]" required>
             </div>
             <div class="mb-3">
                 <label for="religion" class="form-label">Religion <span
                         class="fs-6 text-danger">(Required)</span></label>
-                <input type="text" class="form-control form-control-lg select-input" id="religion" name="religion"
-                    required>
+                <input type="text" class="form-control form-control-lg select-input" id="religion"
+                    name="member[religion]" required>
             </div>
             <div class="mb-3">
                 <label for="school" class="form-label">School <span class="fs-6 text-danger">(Required)</span></label>
-                <input type="text" class="form-control form-control-lg select-input" id="school" name="school" required>
+                <input type="text" class="form-control form-control-lg select-input" id="school" name="member[school]"
+                    required>
             </div>
 
             <div class="mb-3">
                 <label for="medical" class="form-label">Known Medical Conditions</label>
-                <input type="text" class="form-control form-control-lg text-input" id="medical" name="medical">
+                <input type="text" class="form-control form-control-lg text-input" id="medical" name="member[medical]">
             </div>
             <div class="mb-3">
                 <label for="diet" class="form-label">Dietary Requirements</label>
-                <input type="text" class="form-control form-control-lg text-input" id="diet" name="diet">
+                <input type="text" class="form-control form-control-lg text-input" id="diet" name="member[diet]">
             </div>
 
             <% if (qty==='one' ) { %>
@@ -104,12 +108,13 @@
                     <div class="row">
                         <div class="mb-3 d-grip gap-2 col-6 mx-auto">
                             <button type="button" class="btn btn-danger btn-lg btn-xl fs-2">Cancel</button>
+                            <button type="submit" class="btn btn-success btn-lg btn-xl fs-2 mt-3">Finish</button>
                         </div>
                         <div class="mb-3 d-grip gap-2 col-6 mx-auto">
-                            <button type="button" class="btn btn-success btn-lg btn-xl fs-2">Add Another</button>
+                            <button id="login-button" type="button" class="btn btn-success btn-lg btn-xl fs-4">Login & Add Another</button>
                         </div>
                         <div class="mb-3 d-grip gap-2 col-6 mx-auto">
-                            <a type="submit" class="btn btn-success btn-lg btn-xl fs-2">Finish</a>
+                            
                         </div>
                     </div>
                     <% } %>

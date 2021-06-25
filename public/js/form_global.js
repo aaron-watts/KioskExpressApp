@@ -3,6 +3,8 @@ const selectBoards = document.querySelectorAll('.selection-board');
 const choices = document.querySelectorAll('.selection-board .list-group-item');
 const filterInputs = document.querySelectorAll('.filter-input');
 const selectScroll = document.querySelectorAll('.selection-scroll');
+const form = document.querySelector('#main-form');
+const loginButton = document.querySelector('#login-button');
 
 const postcodeRegex = /^(([gG][iI][rR] {0,}0[aA]{2})|((([a-pr-uwyzA-PR-UWYZ][a-hk-yA-HK-Y]?[0-9][0-9]?)|(([a-pr-uwyzA-PR-UWYZ][0-9][a-hjkstuwA-HJKSTUW])|([a-pr-uwyzA-PR-UWYZ][a-hk-yA-HK-Y][0-9][abehmnprv-yABEHMNPRV-Y]))) {0,}[0-9][abd-hjlnp-uw-zABD-HJLNP-UW-Z]{2}))$/;
 
@@ -22,6 +24,22 @@ const idKey = {
     'school': 'schools'
 };
 
+const validateForm = function () {
+    console.log('TESTING')
+    for (let i = 0; i < 14; i++) {
+        if (form[i] === '') console.log('HEY');
+    }
+    if (form[8].value.length !== 11) {
+        console.log('number!')
+        return false
+    }
+    if (!postcodeRegex.test(form[6].value)) {
+        console.log('postcode!')
+        return false
+    }
+    return true
+}
+
 window.onload = async () => {
     const res = await axios.get(`/selections`);
     data['genders'] = res.data.genders;
@@ -29,6 +47,49 @@ window.onload = async () => {
     data['languages'] = res.data.languages;
     data['religions'] = res.data.religions;
     data['schools'] = res.data.schools;
+}
+
+if (loginButton) {
+    loginButton.addEventListener('click', async () => {
+        if (validateForm()) {
+            console.log('PASSED')
+            const res = await axios.post('/register',
+                {
+                    member: {
+                        firstName: form[0].value,
+                        lastName: form[1].value,
+                        dobd: form[2].value,
+                        dobm: form[3].value,
+                        doby: form[4].value,
+                        address: form[5].value,
+                        postcode: form[6].value,
+                        contactName: form[7].value,
+                        contactNumber: form[8].value,
+                        ethnicity: form[9].value,
+                        gender: form[10].value,
+                        language: form[11].value,
+                        religion: form[12].value,
+                        school: form[13].value,
+                        medical: form[14].value,
+                        diet: form[15].value
+                    }
+                });
+            if (res.data === 'SUCCESS') {
+                console.log('YAYYY')
+                form[0].value = '';
+                form[2].value = '';
+                form[3].value = '';
+                form[4].value = '';
+                form[10].value = '';
+                form[14].value = '';
+                form[15].value = '';
+
+                form[0].scrollIntoView(false);
+
+                for (let input of form) changeLabel(input);
+            }
+        }
+    })
 }
 
 const listListener = (e) => {
@@ -193,20 +254,20 @@ const changeLabel = (active) => {
             if (active.value && active.id === 'postcode' && postcodeRegex.test(active.value)) {
                 validateInput(label, true);
             }
-            if (active.value && active.id === 'contactNumber' && active.value.replaceAll(' ','').length === 11) {
+            if (active.value && active.id === 'contactNumber' && active.value.replaceAll(' ', '').length === 11) {
                 validateInput(label, true);
             }
             if (!active.value && active.id !== 'postcode' && active.id !== 'contactNumber') validateInput(label, false);
             if (active.value && active.id === 'postcode' && !postcodeRegex.test(active.value)) {
                 validateInput(label, false);
             }
-            if (active.value && active.id === 'contactNumber' && active.value.replaceAll(' ','').length !== 11) {
+            if (active.value && active.id === 'contactNumber' && active.value.replaceAll(' ', '').length !== 11) {
                 validateInput(label, false);
             }
         }
 
         if (active.id === 'doby') {
-            if (active.value && dobd.value && dobd.value) validateInput(label, true) 
+            if (active.value && dobd.value && dobd.value) validateInput(label, true)
             else validateInput(label, false);
         }
 

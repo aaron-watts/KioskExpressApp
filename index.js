@@ -3,11 +3,14 @@ const port = 3000;
 const app = express();
 const path = require('path');
 const mongoose = require('mongoose');
+const methodOverride = require('method-override')
 
 const db = require('./data');
 const utils = require('./processes');
 const Member = require('./models/member');
 const Attendance = require('./models/attendance');
+
+const register = require('./routes/register');
 
 mongoose.connect('mongodb://localhost:27017/registerApp', {
     useNewUrlParser: true,
@@ -24,6 +27,8 @@ mongoose.connect('mongodb://localhost:27017/registerApp', {
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+app.use(methodOverride('_method')) // query string to search for
+
 //app.use('/static', express.static(path.join(__dirname, 'public')))
 
 app.use(express.static('public'));
@@ -32,20 +37,10 @@ app.set('public', path.join(__dirname, '/public'));
 app.set('views', path.join(__dirname, '/views'));
 app.set('view engine', 'ejs');
 
+app.use('/register', register);
+
 app.get('/', (req, res) => {
     res.render('home');
-})
-
-app.get('/register', (req, res) => {
-    const { qty } = req.query;
-    const { selections } = db;
-    //console.log(selections);
-    //const qty = 'one';
-    res.render('form', { qty, selections });
-})
-
-app.post('/register', (req, res) => {
-    res.send(req.body);
 })
 
 app.get('/selections', (req, res) => {
@@ -60,18 +55,18 @@ app.post('/signin', (req, res) => {
         .then(resolve => {
             console.log(resolve);
             //console.log(db.attendance);
-            res.send('SUCCESS');
+            res.send('SUCCESS!')
         }, err => {
             console.log(err);
-            res.send(error);
+            res.send(Error);
         });
 })
 
-app.get('/checkin', (req, res) => {
-    res.render('tasks');
+app.get('/search', (req, res) => {
+    res.render('search');
 })
 
-app.get('/show', async (req, res) => {
+app.get('/signin', async (req, res) => {
     const { name, postcode } = req.query;
     const allNames = name.split(' ');
     const firstName = allNames[0];
@@ -113,7 +108,7 @@ app.get('/show', async (req, res) => {
         matches.push({ id, firstName, lastName, postcode, emergencyNumber, signedIn });
     }
 
-    res.render('show', { matches });
+    res.render('signin', { matches });
 })
 
 app.listen(port, () => {
