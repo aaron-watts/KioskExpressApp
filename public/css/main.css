@@ -88,7 +88,7 @@ button.scroll.selection.down {
 }
 
 button.scroll.up {
-    top: 100px;
+    top: 140px;
 }
 
 button.scroll.down {
@@ -120,7 +120,7 @@ button.scroll.table-scroll.up {
 }
 
 .page-top {
-    margin-top: 70px;
+    margin-top: 100px;
 }
 
 .dob-container {
@@ -247,7 +247,8 @@ input[type=number] {
     border: 1px solid lightgray;
     /*transition: background-color .5s;*/
 }
-.keyboard button:focus, .keyboard button:active {
+.keyboard button:focus, .keyboard button:active,
+.keypad  button:focus, .keypad button:active {
     /*background-color: lightseagreen;*/
     animation: animate .15s linear;
 }

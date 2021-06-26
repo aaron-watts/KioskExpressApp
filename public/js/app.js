@@ -20,6 +20,23 @@ let caps = false;
 
 const htmlScroll = document.querySelector('html');
 
+const generateAlert = (message) => {
+    const body = document.querySelector('body');
+    const alert = document.createElement('DIV');
+    alert.classList.add('alert', 'alert-info');
+    alert.innerHTML = message;
+    alert.addEventListener('transitionend', function (e) {
+        console.log('TRANSITION ENDED!!!!!');
+        this.remove();
+    }, true)
+    body.append(alert);
+    setTimeout(() => {
+        const lastAlert = document.querySelector('div.alert:last-of-type');
+        //lastAlert.remove();
+        lastAlert.style.transform = 'translateX(-100vw)';
+    }, 2500)
+}
+
 const setKeyboard = (casing) => {
     console.log(`Changing to ${casing}`);
     if (casing === 'upper') {

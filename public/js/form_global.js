@@ -75,6 +75,7 @@ if (loginButton) {
                     }
                 });
             if (res.data === 'SUCCESS') {
+                generateAlert('Member Successfully Added and Signed In!');
                 console.log('YAYYY')
                 form[0].value = '';
                 form[2].value = '';
