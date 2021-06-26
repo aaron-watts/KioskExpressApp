@@ -50,14 +50,10 @@ app.get('/selections', (req, res) => {
 
 app.post('/signin', (req, res) => {
     const { id } = req.body;
-    console.log(id);
     utils.addToRegister(id)
         .then(resolve => {
-            console.log(resolve);
-            //console.log(db.attendance);
             res.send('SUCCESS!')
         }, err => {
-            console.log(err);
             res.send(Error);
         });
 })

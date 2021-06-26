@@ -149,6 +149,10 @@ input[type=number] {
     padding-top: 8vh;
 }
 
+.fix-btn-width {
+    width: 100%;
+}
+
 .select {
     display: flex;
     flex-direction: column;

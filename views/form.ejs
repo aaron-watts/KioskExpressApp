@@ -95,26 +95,27 @@
 
             <% if (qty==='one' ) { %>
 
-                <div class="row">
-                    <div class="mb-3 d-grip gap-2 col-6 mx-auto">
-                        <button type="button" class="btn btn-danger btn-lg btn-xl fs-2">Cancel</button>
+                <div class="row mt-5">
+                    <div class="mb-3 d-grip gap-2 col-6 mx-auto w-50">
+                        <a href="/" class="btn btn-danger btn-lg btn-xl fs-2 fix-btn-width">Cancel</a>
                     </div>
-                    <div class="mb-3 d-grip gap-2 col-6 mx-auto">
-                        <button class="btn btn-success btn-lg btn-xl fs-2">Finish</button>
+                    <div class="mb-3 d-grip gap-2 col-6 mx-auto w-50">
+                        <button class="btn btn-success btn-lg btn-xl fs-2 fix-btn-width">Finish</button>
                     </div>
                 </div>
 
                 <% } else if (qty==='many' ) { %>
-                    <div class="row">
-                        <div class="mb-3 d-grip gap-2 col-6 mx-auto">
-                            <button type="button" class="btn btn-danger btn-lg btn-xl fs-2">Cancel</button>
-                            <button type="submit" class="btn btn-success btn-lg btn-xl fs-2 mt-3">Finish</button>
+                    <div class="row mt-4">
+                        <div class="mb-3 d-grip gap-2 col mx-auto w-100">
+                            <button type="submit" class="d-grip btn btn-success btn-lg btn-xl fs-2 fix-btn-width">Finish</button>
+                            <a href="/" class="btn btn-danger btn-lg btn-xl fs-2 mt-3 fix-btn-width">Cancel</a>
+                        </div>
+                        <div class="mb-3 d-grip gap-2 col mx-auto">
+                            <button id="login-button" type="button" class="btn btn-success btn-lg btn-xl fs-4">Login &
+                                Add Another</button>
                         </div>
                         <div class="mb-3 d-grip gap-2 col-6 mx-auto">
-                            <button id="login-button" type="button" class="btn btn-success btn-lg btn-xl fs-4">Login & Add Another</button>
-                        </div>
-                        <div class="mb-3 d-grip gap-2 col-6 mx-auto">
-                            
+
                         </div>
                     </div>
                     <% } %>
