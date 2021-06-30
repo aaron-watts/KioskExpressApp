@@ -96,6 +96,7 @@ const selections = {
         'Refuse to Say'
     ],
     'languages': [
+        "English",
         "Acholi",
         "Afar-Saho",
         "Afrikaans",
@@ -143,7 +144,6 @@ const selections = {
         "Ebira",
         "Edo / Bini",
         "Efik-Ibibio",
-        "English",
         "Esan / Ishan",
         "Estonian",
         "Ewe",

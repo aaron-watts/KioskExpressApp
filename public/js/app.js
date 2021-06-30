@@ -66,8 +66,8 @@ keyboardButtons.forEach(button => {
 
         try {
             changeLabel(activeInput);
-        } catch (e) {
-            console.log(e);
+        } catch (err) {
+            console.log(err);
         }
 
         if (activeInput.classList.contains('filter-input')) filterResults(activeInput);
